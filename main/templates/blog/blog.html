@@ -1,44 +1,39 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% load static %} {% block content %}
 
-{% load static %}
+<h2 id="blogtitle" class="font-bold text-center">Блог</h2>
 
-{% block content %}
-
-<h2 id="blogtitle" class="font-weight-bold text-center">Блог</h2>
-
-<div class="d-flex justify-content-center">
-  <form method="post">
-    {% csrf_token %}
-    <div class="mb-2">
-      <label for="category" class="form-label">Выбор категории:</label>
-      <select name="category_id" id="category" class="form-select">
-        {% for category in categories %}
-        <option value="{{ category.id }}">{{ category.name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Найти</button>
-  </form>
+<div class="flex justify-center">
+	<form method="post">
+		{% csrf_token %}
+		<div class="mb-2">
+			<label for="category" class="block">Выбор категории:</label>
+			<select name="category_id" id="category" class="form-select">
+				{% for category in categories %}
+				<option value="{{ category.id }}">{{ category.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Найти</button>
+	</form>
 </div>
-
 
 <div class="text-center">
-  <a href="{% url 'blog' %}">Сбросить</a>
+	<a href="{% url 'blog' %}" class="block">Сбросить</a>
 </div>
- 
-{% for blog in blogs %}
-<div class= "row justify-content-center mb-12">
-  <div class="col-md-2">
-    <div>
-      <a href="{% url 'blog:detail' blog.id %}">
-        <h2>{{ blog.title }}</h2>
-      </a>
-      <img src="{{ blog.image.url }}" class="col-md-11"/>
-    <h5 class="text-muted">{{ blog.date|date:'M d Y'|upper }}</h5>
-    <h4>{{ blog.description|striptags|truncatechars:100 }}</h4>
-    <h5 class="text-muted">{{ blog.categories.first.name }}</h5>
-  </div>
-</div>
-{% endfor %}
 
-{% endblock %}
+{% for blog in blogs %}
+<div
+	class="flex rounded-lg mx-auto justify-center items-center mb-12 bg-[#111] w-[400px] p-5"
+>
+	<div class="w-72">
+		<div>
+			<a href="{% url 'blog:detail' blog.id %}">
+				<h2 class="text-lg font-bold">{{ blog.title }}</h2>
+			</a>
+			<h4 class="mt-2">{{ blog.description|striptags|truncatechars:100 }}</h4>
+			<h5 class="text-xs uppercase">{{ blog.date|date:'M d Y' }}</h5>
+			<h5 class="text-xs">{{ blog.categories.first.name }}</h5>
+		</div>
+	</div>
+</div>
+{% endfor %} {% endblock %}

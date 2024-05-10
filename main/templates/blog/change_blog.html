@@ -1,12 +1,44 @@
 {% extends 'main/base.html' %} {% block content %} {{ error }}
 
-<form method="POST" enctype="multipart/form-data">
-	{% csrf_token %} {{ form.as_p }}
-	<button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
+<div class="flex justify-center rounded-md mt-5">
+	<div class="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+		<form method="post" enctype="multipart/form-data">
+			<h1 class="text-center mb-4 text-lg font-bold">Рыедактировать запись</h1>
+			{% csrf_token %}
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="title"
+				>Заголовок</label
+			>
+			{{ form.title }}
+			<label
+				class="block text-gray-700 text-sm font-bold mb-2"
+				for="description"
+				>Описание</label
+			>
+			{{ form.description }}
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="image"
+				>Изображение</label
+			>
+			{{ form.image }}
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="categories"
+				>Категории</label
+			>
+			{{ form.categories }}
+			<button
+				type="submit"
+				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mt-4"
+			>
+				Создать
+			</button>
+		</form>
+	</div>
+</div>
 
-<form method="POST" action="{% url 'delete_blog' blog.pk %}">
-	<button type="submit" class="btn btn-danger">Удалить</button>
+<form
+	class="flex justify-center"
+	method="POST"
+	action="{% url 'delete_blog' blog.pk %}"
+>
+	<button type="submit" class="p-3 bg-red-500 hover:bg-red-700">Удалить</button>
 	{% csrf_token %}
 </form>
 
