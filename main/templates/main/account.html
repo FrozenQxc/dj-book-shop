@@ -1,37 +1,42 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% block content %}
 
-{% block content %}
-
-{% csrf_token %}
 <div class="text-center">
-    <h1>Вы зашли под пользователем {{ user.username }}</h1>
-    <h2>Это ваши записи:</h2>
-    
+	<h1>Привет, пользователь под ником: {{ user.username }}!</h1>
+	<h2>Это твои записи:</h2>
 </div>
 
-<div class="row justify-content-center mb-15">
-    {% for blog in blogs %}
-      <div class="col-md-2">
-        {% with blog.image.url as blog_image_url %}
-          <a href="{{ blog.url|default:'#' }}">
-            <img src="{{ blog_image_url }}" class="img-fluid mb-2"/>
-          </a>
-        {% endwith %}
-        <div class="text-center">
-            <h3>{{ blog.title }}</h3>
-            <p>{{ blog.description }}</p>
-            <h5>{{ blog.date|date:'M j Y' }}</h5>
-            <h5 class="text-muted" >{{ blog.categories.first.name }}</h5>
-            <a href="{% url 'changeBlog' blog_pk=blog.pk %}">Редактировать запись</a>
-        </div> 
-      </div>
-    {% endfor %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+	{% for blog in blogs %}
+	<div class="bg-white p-4 shadow-md rounded-md">
+		{% with blog.image.url as blog_image_url %}
+		<a href="{{ blog.url|default:'#' }}">
+			<img src="{{ blog_image_url }}" class="w-full mb-2 rounded-md" />
+		</a>
+		{% endwith %}
+		<div class="text-center">
+			<h3 class="text-lg font-semibold">{{ blog.title }}</h3>
+			<p>{{ blog.description }}</p>
+			<h5 class="mt-2 text-sm text-gray-500">{{ blog.date|date:'M j Y' }}</h5>
+			<h5 class="mt-1 text-sm text-gray-500">
+				{{ blog.categories.first.name }}
+			</h5>
+			<a
+				href="{% url 'change_blog' blog_pk=blog.pk %}"
+				class="text-blue-500 hover:underline"
+				>Редактировать запись</a
+			>
+		</div>
+	</div>
+	{% endfor %}
 </div>
 
-<form method="get" action="{% url 'createBlog' %}">
-  <div class="text-center">
-      <button type="submit" class="btn btn-primary mt-5">Создать запись</button>
-  </div>
+<form method="get" action="{% url 'create_blog' %}" class="text-center mt-8">
+	<button
+		type="submit"
+		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+	>
+		Создать запись
+	</button>
 </form>
 
 {% endblock %}

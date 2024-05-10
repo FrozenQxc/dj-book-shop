@@ -18,9 +18,9 @@ urlpatterns = [
 
     # Аккаунт   
     path('account/', account, name='account'),
-    path('account/create-blog/', createBlog, name='createBlog'),
-    path('account/<int:blog_pk>/delete', deleteBlog, name='deleteBlog'),
-    path('account/<int:blog_pk>/red', changeBlog, name='changeBlog'),
+    path('account/create-blog/', create_blog, name='create_blog'),
+    path('account/<int:blog_pk>/delete', delete_blog, name='delete_blog'),
+    path('account/<int:blog_pk>/red', change_blog, name='change_blog'),
 
     path('blog/', include('main.urls')),
     path('blog/', blog, name='blog'),

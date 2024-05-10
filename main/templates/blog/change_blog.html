@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %} {% block content %} {{ error }}
+
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %} {{ form.as_p }}
+	<button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+<form method="POST" action="{% url 'delete_blog' blog.pk %}">
+	<button type="submit" class="btn btn-danger">Удалить</button>
+	{% csrf_token %}
+</form>
+
+{% endblock %}
