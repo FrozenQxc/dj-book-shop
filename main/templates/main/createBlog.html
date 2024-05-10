@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h2>{{ error }}</h2>
+
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <form method="post" enctype="multipart/form-data">
+      <h1>Создать запись</h1>
+      {% csrf_token %}     
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Cоздать</button>
+    </form>
+    
+  </div>
+</div>
+
+
+<div class="row justify-content-center mb-15">
+  {% for blog in blogs %}
+    <div class="col-md-2">
+      {% if blog.url %}
+        <a href="{{ blog.url }}">
+          <img src="{{ blog.image.url }}" class="img-fluid mb-2"/>
+        </a>
+      {% else %}
+        <img src="{{ blog.image.url }}" class="img-fluid mb-2"/>
+      {% endif %}
+      <div class="text-center">
+          <h3>{{ blog.title }}</h3>
+          <p>{{ blog.description }}</p>
+          <h5>{{ blog.date|date:'M j Y' }}</h5>
+          <h5 class="text-muted">{{ blog.categories.first.name }}</h5>
+      </div>
+    </div>
+  {% endfor %}
+  
+{% endblock %}  

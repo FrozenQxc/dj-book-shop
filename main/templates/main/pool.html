@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %} {% block content %}
+<div class="flex justify-center items-center h-full mt-10 w-full">
+	<div class="flex justify-center items-center h-full mt-10 w-full">
+		{% if data %}
+		<div class="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+			<h2 class="text-2xl font-bold mb-4">Вы отправили следующие данные:</h2>
+			<p><span class="font-bold">Имя:</span> {{ data.name }}</p>
+			<p><span class="font-bold">Email:</span> {{ data.email }}</p>
+			<p><span class="font-bold">Проблема:</span> {{ data.problem }}</p>
+			<p><span class="font-bold">Описание:</span> {{ data.description }}</p>
+			<h1 class="text-xl font-bold mt-6">Мы обязательно с вами свяжемся!</h1>
+		</div>
+
+		{% else %}
+		<div>
+			<h1 class="m-5 text-[28px] justify-center flex">Обратная связь</h1>
+			<form
+				method="post"
+				class="flex flex-col gap-2 w-[700px] bg-white p-8 rounded-lg shadow-md"
+			>
+				{% csrf_token %}
+				<label for="{{ form.name.id_for_label }}" class="text-gray-800">
+					{{ form.name.label }}</label
+				>
+				{{ form.name}}
+				<label for="{{ form.email.id_for_label }}" class="text-gray-800">
+					{{ form.email.label }}</label
+				>
+				{{ form.email }}
+				<label for="{{ form.problem.id_for_label }}" class="text-gray-800">
+					{{ form.problem.label }}</label
+				>
+				{{ form.problem }}
+				<label for="{{ form.description.id_for_label }}" class="text-gray-800">
+					{{ form.description.label }}</label
+				>
+				{{ form.description}}
+				<button
+					type="submit"
+					class="bg-black text-white text-lg font-bold py-5 mt-3 rounded-md hover:bg-gray-800 transition duration-300 ease-in-out"
+				>
+					Отправить
+				</button>
+			</form>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
