@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import datetime
-from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")

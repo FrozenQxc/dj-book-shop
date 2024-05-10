@@ -19,7 +19,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .models import Blog, Category, Carousel, Comment
+from .models import Blog, Category,  Comment
 from .forms import BlogForm
 
 from datetime import datetime
