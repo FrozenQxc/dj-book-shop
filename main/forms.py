@@ -1,11 +1,18 @@
 from django.forms import ModelForm
-from .models import Blog
 from django import forms
+from .models import Comment, Blog
 
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
         fields = ['title' ,'description', 'image','categories']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
+        labels = {'text': "Комментарий"}
+
 
 class Feedback(forms.Form):
     name = forms.CharField(label='Ваше имя', min_length=0, max_length=100)

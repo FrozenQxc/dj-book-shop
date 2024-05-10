@@ -3,14 +3,27 @@ from .forms import Feedback
 from django.contrib.auth import logout 
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.timezone import datetime
+from .models import Blog, Comment
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.timezone import datetime
+from .models import Blog, Comment
+from .forms import CommentForm
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .models import Blog, Category
+from .models import Blog, Category, Carousel, Comment
 from .forms import BlogForm
+
+from datetime import datetime
+
 
 
 
@@ -35,6 +48,8 @@ def pool(request):
     
     return render(request, 'main/pool.html', {'form': form, 'data': data})
 
+def about(request):
+    return render(request, 'main/about_us.html')
 
 @login_required    
 def account(request):
@@ -80,10 +95,24 @@ def delete_blog(request, blog_pk):
         blog.delete()
         return redirect('account')
 
-
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
-    return render(request, 'blog/detail.html', {'blog': blog})
+    comments = Comment.objects.filter(post=blog_id)
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_f = form.save(commit=False)
+            comment_f.author = request.user
+            comment_f.date = datetime.now()
+            comment_f.post = blog
+            comment_f.save()
+            return redirect('blog:detail', blog_pk=blog_id)  
+    else:
+        form = CommentForm()
+    
+    return render(request, 'blog/detail.html', {'blog': blog, 'form': form, 'comments': comments})
+
 
 def blog(request):
     categories = Category.objects.all() 

@@ -9,7 +9,8 @@ urlpatterns = [
     path('', home, name='home'),
 
     # Шапка
-    path('pool/' , pool, name='pool' ),
+    path('pool/', pool, name='pool'),
+    path('about/', about, name='about'),  # Исправлено имя URL-адреса "about"
 
     # Аутентификация 
     path('logout/', logout_user, name='logout_user'),
@@ -19,12 +20,11 @@ urlpatterns = [
     # Аккаунт   
     path('account/', account, name='account'),
     path('account/create-blog/', create_blog, name='create_blog'),
-    path('account/<int:blog_pk>/delete', delete_blog, name='delete_blog'),
-    path('account/<int:blog_pk>/red', change_blog, name='change_blog'),
+    path('account/<int:blog_pk>/delete/', delete_blog, name='delete_blog'),  # Добавлена косая черта в конце
+    path('account/<int:blog_pk>/change/', change_blog, name='change_blog'),  # Добавлена косая черта в конце
 
     path('blog/', include('main.urls')),
     path('blog/', blog, name='blog'),
 
 ]
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,21 +1,21 @@
-{% load static tailwind_tags %}
+{% load static tailwind_tags %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		{% tailwind_css %}
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Книжный магазин</title>
-		<link rel="stylesheet" href="{% static "styles/styles.css" %}"> <link
-		rel="icon" href="{% static "images/logo.svg" %}">
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+		<link rel="icon" href="{% static 'images/logo.svg' %}" />
+		{% tailwind_css %}
 	</head>
 	<body class="min-h-full bg-gray-900">
 		<header class="flex p-10 bg-gray-200">
 			<nav class="flex items-center justify-between w-full">
 				<div class="flex items-center">
 					<a href="/" class="flex items-center gap-3">
-						<img src="{% static "images/logo.svg" %}" alt="Logo" class="w-14">
+						<img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-14" />
 						<h1 class="text-2xl font-medium text-gray-800">Книжный магазин</h1>
 					</a>
 				</div>
@@ -29,7 +29,7 @@
 					</li>
 					<li>
 						<a
-							href="{% url 'pool' %}"
+							href="/pool"
 							class="text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out"
 							>Обратная связь</a
 						>
@@ -43,7 +43,7 @@
 					</li>
 					<li>
 						<a
-							href="{% url 'pool' %}"
+							href="{% url 'about' %}"
 							class="text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out"
 							>О нас</a
 						>
@@ -61,19 +61,25 @@
 								class="flex justify-center items-center gap-3"
 							>
 								<span class="text-[18px]"> {{ user.username }}</span>
-								<img src="{% static "images/user.svg.png" %}" alt="user"
-								class="w-10 h-10 bg-black rounded-[50%]">
+								<img
+									src="{% static 'images/user.svg.png' %}"
+									alt="user"
+									class="w-10 h-10 bg-black rounded-[50%]"
+								/>
 							</a>
 							<button type="submit">
-								<img src="{% static "images/exit.svg" %}" alt="exit"
-								class="w-7">
+								<img
+									src="{% static 'images/exit.svg' %}"
+									alt="exit"
+									class="w-7"
+								/>
 							</button>
 						</form>
 					</li>
 					{% else %}
 					<li>
 						<a
-							href="{% url 'register' %}"
+							href="{% url 'egister' %}"
 							class="flex items-center text-white bg-blue-500 px-3 py-1 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
 							>Регистрация</a
 						>
@@ -89,10 +95,10 @@
 				</ul>
 			</nav>
 		</header>
-
-		<main></main>
-
 		{% block content %} {% endblock %}
-		<script src="{% static 'script.js' %}"></script>
+
+		<script type="module" src="{% static 'javascript/script.js' %}"></script>
+
+		{% block scripts %}{% endblock %}
 	</body>
 </html>
