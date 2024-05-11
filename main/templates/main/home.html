@@ -1,10 +1,63 @@
 {% extends 'main/base.html' %} {% block content %} {% load static %}
-<main>
-	<!-- Slider main container -->
-	<div class="swiper w-full h-[600px] relative">
-		<!-- Additional required wrapper -->
-		<div class="swiper-wrapper">
-			<!-- Slide 1 -->
+
+<head>
+	<meta charset="utf-8" />
+	<title>Swiper demo</title>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+	/>
+
+	<style>
+		html,
+		body {
+			position: relative;
+			height: 100%;
+		}
+
+		body {
+			background: #eee;
+			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #000;
+			margin: 0;
+		}
+
+		swiper-container {
+			width: 100%;
+			height: 100%;
+		}
+
+		swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		swiper-slide img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body class="">
+	<swiper-container
+		class="w-full h-[600px] relative"
+		pagination="true"
+		pagination-clickable="true"
+		navigation="true"
+		space-between="30"
+		centered-slides="true"
+		autoplay-delay="2500"
+		autoplay-disable-on-interaction="false"
+	>
+		<swiper-slide class="bg-gray-200 relative">
 			<div class="swiper-slide bg-gray-200 flex items-center justify-center">
 				<img
 					src="{% static 'slider/2.jpg' %}"
@@ -26,11 +79,12 @@
 					</p>
 				</div>
 			</div>
-			<!-- Slide 2 -->
+		</swiper-slide>
+		<swiper-slide class="bg-gray-200 relative">
 			<div class="swiper-slide bg-gray-200 flex items-center justify-center">
 				<img
 					src="{% static 'slider/3.jpg' %}"
-					alt="Book 2"
+					alt="Book 1"
 					class="w-full h-full object-cover"
 				/>
 				<div
@@ -48,11 +102,12 @@
 					</p>
 				</div>
 			</div>
-			<!-- Slide 3 -->
+		</swiper-slide>
+		<swiper-slide class="bg-gray-200 relative">
 			<div class="swiper-slide bg-gray-200 flex items-center justify-center">
 				<img
 					src="{% static 'slider/4.jpg' %}"
-					alt="Book 3"
+					alt="Book 1"
 					class="w-full h-full object-cover"
 				/>
 				<div
@@ -70,59 +125,9 @@
 					</p>
 				</div>
 			</div>
-		</div>
-		<!-- If we need pagination -->
-		<div class="swiper-pagination"></div>
+		</swiper-slide>
+	</swiper-container>
 
-		<!-- If we need navigation buttons -->
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div>
-
-		<!-- If we need scrollbar -->
-		<div class="swiper-scrollbar"></div>
-
-		<!-- Progress Circle for Autoplay -->
-		<div class="autoplay-progress absolute bottom-4 right-4 hidden">
-			<svg viewBox="0 0 48 48" class="w-10 h-10">
-				<circle
-					cx="24"
-					cy="24"
-					r="20"
-					fill="none"
-					stroke="#000"
-					stroke-width="4"
-				></circle>
-			</svg>
-			<span class="ml-2">5s</span>
-		</div>
-	</div>
-
-	<script>
-		var swiper = new Swiper('.swiper', {
-			pagination: {
-				el: '.swiper-pagination',
-			},
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev',
-			},
-			scrollbar: {
-				el: '.swiper-scrollbar',
-			},
-
-			autoplay: {
-				delay: 3000,
-			},
-			on: {
-				slideChange: function () {
-					var timeLeft =
-						this.params.autoplay.delay -
-						this.autoplay.getProgress() * this.params.autoplay.delay
-					document.querySelector('.autoplay-progress span').textContent =
-						Math.ceil(timeLeft / 1000) + 's'
-				},
-			},
-		})
-	</script>
-</main>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+</body>
 {% endblock %}
