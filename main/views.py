@@ -48,6 +48,9 @@ def pool(request):
     
     return render(request, 'main/pool.html', {'form': form, 'data': data})
 
+def videopost(request):
+    return render(request, 'main/videopost.html')
+
 def about(request):
     return render(request, 'main/about_us.html')
 
@@ -96,7 +99,7 @@ def delete_blog(request, blog_pk):
         return redirect('account')
 
 def detail(request, blog_id):
-    blog = get_object_or_404(Blog, id=blog_id)
+    blog = get_object_or_404(Blog, pk=blog_id)
     comments = Comment.objects.filter(post=blog_id)
     
     if request.method == "POST":
@@ -107,11 +110,13 @@ def detail(request, blog_id):
             comment_f.date = datetime.now()
             comment_f.post = blog
             comment_f.save()
-            return redirect('blog:detail', blog_pk=blog_id)  
+            return redirect('blog:detail', blog_id=blog_id)  # Измененный вызов
     else:
         form = CommentForm()
     
     return render(request, 'blog/detail.html', {'blog': blog, 'form': form, 'comments': comments})
+
+
 
 
 def blog(request):

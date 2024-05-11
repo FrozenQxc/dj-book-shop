@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %} {% load static tailwind_tags %} {% load static %}
+{% block content %}
+
+<div class="flex justify-center items-center gap-5 mt-3">
+	<div class="text-center">
+		<h1 class="text-4xl font-bold mb-8">Видео</h1>
+
+		<div class="max-w-md space-y-4">
+			<h1>Кто такие думеры?</h1>
+			<video controls poster="{% static 'images/test.jpg' %}" class="w-full">
+				<source src="{% static 'video/1.mp4' %}" type="video/mp4" />
+				Ваш браузер не поддерживает видео.
+			</video>
+
+			<h1>Невероятный новый современный гемплей!</h1>
+			<video
+				controls
+				poster="{% static 'images/test.jpg' %}"
+				class="w-full mt-4"
+			>
+				<source src="{% static 'video/2.mp4' %}" type="video/mp4" />
+				Ваш браузер не поддерживает видео.
+			</video>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

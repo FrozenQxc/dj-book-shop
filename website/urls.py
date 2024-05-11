@@ -10,7 +10,9 @@ urlpatterns = [
 
     # Шапка
     path('pool/', pool, name='pool'),
-    path('about/', about, name='about'),  # Исправлено имя URL-адреса "about"
+    path('about/', about, name='about'),  
+    path('video/', videopost, name='video'),
+
 
     # Аутентификация 
     path('logout/', logout_user, name='logout_user'),
