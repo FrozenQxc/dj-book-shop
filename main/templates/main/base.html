@@ -6,6 +6,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Книжный магазин</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+		/>
+
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 		<link rel="icon" href="{% static 'images/logo.svg' %}" />
 		{% tailwind_css %}
@@ -86,7 +92,7 @@
 					{% else %}
 					<li>
 						<a
-							href="{% url 'egister' %}"
+							href="{% url 'register' %}"
 							class="flex items-center text-white bg-blue-500 px-3 py-1 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
 							>Регистрация</a
 						>
@@ -102,10 +108,14 @@
 				</ul>
 			</nav>
 		</header>
-		{% block content %} {% endblock %}
 
+		{% block content %} {% endblock %} {% block scripts %}
 		<script type="module" src="{% static 'javascript/script.js' %}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script type="module">
+			import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+		</script>
 
-		{% block scripts %}{% endblock %}
+		{% endblock %}
 	</body>
 </html>

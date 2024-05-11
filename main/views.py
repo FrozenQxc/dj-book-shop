@@ -28,7 +28,7 @@ from datetime import datetime
 
 
 def home(request):
-    return render(request, 'main/base.html')
+    return render(request, 'main/home.html')
 def pool(request):
     data = None
     problem_choices = {'1': 'Проблема с оплатой', '2': 'Проблемы с доставкой'}
