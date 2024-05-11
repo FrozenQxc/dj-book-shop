@@ -1,9 +1,9 @@
 {% extends 'main/base.html' %} {% block content %} {{ error }}
 
 <div class="flex justify-center rounded-md mt-5">
-	<div class="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+	<div class="w-[600px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 		<form method="post" enctype="multipart/form-data">
-			<h1 class="text-center mb-4 text-lg font-bold">Рыедактировать запись</h1>
+			<h1 class="text-center mb-4 text-lg font-bold">Редактировать запись</h1>
 			{% csrf_token %}
 			<label class="block text-gray-700 text-sm font-bold mb-2" for="title"
 				>Заголовок</label
